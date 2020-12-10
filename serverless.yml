@@ -1,0 +1,15 @@
+service: JuliaLangPullRequests
+plugins:
+  - serverless-python-requirements
+provider:
+  name: aws
+  runtime: python3.8
+  environment:
+    GITHUB_TOKEN: ${env:GITHUB_TOKEN}
+functions:
+  webhook:
+    handler: src.handler
+    events:
+      - http:
+          path: webhook
+          method: post
