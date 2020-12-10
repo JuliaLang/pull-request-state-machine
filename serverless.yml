@@ -1,4 +1,4 @@
-service: JuliaLangPullRequests
+service: JuliaLang-pull-request-state-machine
 plugins:
   - serverless-python-requirements
 provider:

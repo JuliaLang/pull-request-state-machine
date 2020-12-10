@@ -1,5 +1,5 @@
 {
-  "name": "JuliaLangPullRequests",
+  "name": "JuliaLang-pull-request-state-machine",
   "description": "",
   "version": "0.1.0",
   "devDependencies": {
