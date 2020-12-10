@@ -50,9 +50,8 @@ def on_status(state, event, action, payload):
     return state
 
 def state_unchanged(state, event, action, payload):
-    print(f'stay_in_same_state: {state}, {event}, {action}')
+    print(f'state_unchanged: {state}, {event}, {action}')
     return state
-
 
 def transition_function(state, event, action, payload):
     if event == "pull_request":
@@ -77,7 +76,7 @@ def transition_function(state, event, action, payload):
             return state_unchanged
     elif event == "issue_comment":
         if action == "created":
-            if True:
+            if True: # TODO: check the payload, and only return on_pr_comment if the issue is a pull request
                 return on_pr_comment
             else:
                 return stay_in_same_state
