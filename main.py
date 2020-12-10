@@ -1,4 +1,5 @@
 LABEL_PREFIX = "state:"
+
 LABELS = {
     "abandoned":     LABEL_PREFIX + "abandoned",
     "accepted":      LABEL_PREFIX + "accepted",
@@ -14,7 +15,7 @@ LABELS = {
 def set_state(new_state):
     new_label = LABELS[new_state]
     print(f'The new state is: {state}')
-    print(f'The new labels is: {v}')
+    print(f'The new labels is: {new_label}')
     return state
 
 def on_pr_closed(state, event, action, payload):
