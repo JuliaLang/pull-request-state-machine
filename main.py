@@ -1,4 +1,4 @@
-LABEL_PREFIX = "state:"
+LABEL_PREFIX = "state: "
 
 LABELS = {
     "abandoned":     LABEL_PREFIX + "abandoned",
@@ -47,11 +47,11 @@ def on_pr_synchronize(state, event, action, payload):
     return state
 
 def on_status(state, event, action, payload):
+    # TODO: use the commit SHA to look up the corresponding pull request number
     print(f'on_status: {state}, {event}, {action}')
     return state
 
 def state_unchanged(state, event, action, payload):
-    print(f'state_unchanged: {state}, {event}, {action}')
     return state
 
 def transition_function(state, event, action, payload):
@@ -65,7 +65,7 @@ def transition_function(state, event, action, payload):
         elif action == "synchronize":
             return on_pr_synchronize
         else:
-            print(f'Warning: unsupported action. state={state}, event={event}, action={action}.')
+            print(f'Warning: unsupported action; state={state}, event={event}, action={action}.')
             return state_unchanged
     elif event == "pull_request_review":
         if action == "submitted":
@@ -73,21 +73,21 @@ def transition_function(state, event, action, payload):
         elif action == "dismissed":
             return on_pr_review_dismissed
         else:
-            print(f'Warning: unsupported action. state={state}, event={event}, action={action}.')
+            print(f'Warning: unsupported action; state={state}, event={event}, action={action}.')
             return state_unchanged
     elif event == "issue_comment":
         if action == "created":
-            if True: # TODO: check the payload, and only return on_pr_comment if the issue is a pull request
+            if True: # TODO: check the payload, and only return `on_pr_comment` if the issue is a pull request
                 return on_pr_comment
             else:
                 return stay_in_same_state
         else:
-            print(f'Warning: unsupported action. state={state}, event={event}, action={action}.')
+            print(f'Warning: unsupported action; state={state}, event={event}, action={action}.')
             return state_unchanged
     elif event == "status":
         return on_status
     else:
-        print(f'Warning: unsupported event. state={state}, event={event}, action={action}.')
+        print(f'Warning: unsupported event; state={state}, event={event}, action={action}.')
         return state_unchanged
 
 def main():
